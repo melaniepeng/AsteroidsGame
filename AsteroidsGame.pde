@@ -8,16 +8,53 @@ public void draw()
 {
   background(0);
   me.show();
-  keyPressed();
+  //keyPressed();
 }
 public void keyPressed()
 {
   if (key == 'h')
   {
-    me.setX((int)Math.random()*600);
-    me.setY((int)Math.random()*600);
+    me.setX((int)(Math.random()*592)+8);
+    me.setY((int)(Math.random()*590)+10);
+    me.setPointDirection((int)(Math.random()*360));
   }
+  if (key == 'w')
+  {
+    if(me.getPointDirection() == 0)
+    {
+      me.setX(me.getX()+1);
+    }
+    else if (me.getPointDirection() == 90)
+    {
+      me.setY(me.getY()+1);
+    }
+    else if (me.getPointDirection() == 180)
+    {
+      me.setX(me.getX()-1);
+    }
+    else if(me.getPointDirection() == 270)
+    {
+      me.setY(me.getY()-1);
+    }
+    else if (me.getPointDirection() > 0 && me.getPointDirection() < 90)
+    {
+      me.setX(me.getX()+1);
+      me.setY(me.getY()+1);
+    }
+    else if (me.getPointDirection() > 90 && me.getPointDirection() < 180)
+    {
+
+    }
+    else if (me.getPointDirection() > 180 && me.getPointDirection() < 270)
+    {
+
+    }
+    else//me.getPointDirection() > 270 && me.getPointDirection() >360
+    {
+      
+    }
   }
+}
 class SpaceShip extends Floater  
 {   
   public SpaceShip()
