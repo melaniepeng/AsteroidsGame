@@ -3,15 +3,18 @@ SpaceShip me = new SpaceShip();
 public void setup() 
 {
   size(600,600);
+  //noLoop();
 }
 public void draw() 
 {
   background(0);
+  me.move();
   me.show();
-  //keyPressed();
+  
 }
 public void keyPressed()
 {
+  //redraw();
   if (key == 'h')
   {
     me.setX((int)(Math.random()*592)+8);
@@ -20,39 +23,19 @@ public void keyPressed()
   }
   if (key == 'w')
   {
-    if(me.getPointDirection() == 0)
-    {
-      me.setX(me.getX()+1);
-    }
-    else if (me.getPointDirection() == 90)
-    {
-      me.setY(me.getY()+1);
-    }
-    else if (me.getPointDirection() == 180)
-    {
-      me.setX(me.getX()-1);
-    }
-    else if(me.getPointDirection() == 270)
-    {
-      me.setY(me.getY()-1);
-    }
-    else if (me.getPointDirection() > 0 && me.getPointDirection() < 90)
-    {
-      me.setX(me.getX()+1);
-      me.setY(me.getY()+1);
-    }
-    else if (me.getPointDirection() > 90 && me.getPointDirection() < 180)
-    {
-
-    }
-    else if (me.getPointDirection() > 180 && me.getPointDirection() < 270)
-    {
-
-    }
-    else//me.getPointDirection() > 270 && me.getPointDirection() >360
-    {
-      
-    }
+    me.accelerate(.1);
+  }
+  if (key == 's')
+  {
+    me.accelerate(-.1);
+  }
+  if(key == 'a')
+  {
+    me.rotate(-10);
+  }
+  if(key == 'd')
+  {
+    me.rotate(10);
   }
 }
 class SpaceShip extends Floater  
@@ -62,12 +45,12 @@ class SpaceShip extends Floater
     myCenterX = 300;
     myCenterY = 300;
     myColor = 255;
-    myDirectionX = 0;
-    myDirectionY = 0;
+    myDirectionX = Math.cos(myPointDirection);
+    myDirectionY = Math.sin(myPointDirection);
     myPointDirection = 0;
     corners = 4;
     int[] xS = {-8, 16, -8, -2};
-    int[] yS = {-10, 0, 10, 0};
+    int[] yS = {-8, 0, 8, 0};
     xCorners = xS;
     yCorners = yS;
   }
@@ -160,3 +143,39 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
 } 
 
 
+/*if(me.getPointDirection() == 0)
+    {
+      me.setX(me.getX()+1);
+    }
+    else if (me.getPointDirection() == 90)
+    {
+      me.setY(me.getY()+1);
+    }
+    else if (me.getPointDirection() == 180)
+    {
+      me.setX(me.getX()-1);
+    }
+    else if(me.getPointDirection() == 270)
+    {
+      me.setY(me.getY()-1);
+    }
+    else if (me.getPointDirection() > 0 && me.getPointDirection() < 90)
+    {
+      me.setX(me.getX()+1);
+      me.setY(me.getY()+1);
+    }
+    else if (me.getPointDirection() > 90 && me.getPointDirection() < 180)
+    {
+      me.setX(me.getX()-1);
+      me.setY(me.getY()+1);
+    }
+    else if (me.getPointDirection() > 180 && me.getPointDirection() < 270)
+    {
+      me.setX(me.getX()-1);
+      me.setY(me.getY()-1);
+    }
+    else//me.getPointDirection() > 270 && me.getPointDirection() >360
+    {
+      me.setX(me.getX()+1);
+      me.setY(me.getY()-1);
+    }*/
