@@ -1,16 +1,25 @@
 SpaceShip me = new SpaceShip();
-//int num = (int)Math.random()*600;
+Star[] alot;
 public void setup() 
 {
   size(600,600);
-  //noLoop();
+  alot = new Star [100];
+  for (int i = 0; i < alot.length; i++)
+  {
+    alot[i] = new Star();
+  }
 }
 public void draw() 
 {
   background(0);
-  me.move();
   me.show();
+  me.move();
+  for (int i = 0; i < alot.length; i++)
+  {
+    alot[i].show();
+  }
   
+
 }
 public void keyPressed()
 {
@@ -21,21 +30,24 @@ public void keyPressed()
     me.setY((int)(Math.random()*590)+10);
     me.setPointDirection((int)(Math.random()*360));
   }
-  if (key == 'w')
+  if (key == CODED) 
   {
-    me.accelerate(.1);
-  }
-  if (key == 's')
-  {
-    me.accelerate(-.1);
-  }
-  if(key == 'a')
-  {
-    me.rotate(-10);
-  }
-  if(key == 'd')
-  {
-    me.rotate(10);
+    if (keyCode == UP)
+    {
+      me.accelerate(.1);
+    }
+    if (keyCode == DOWN)
+    {
+      me.accelerate(-.1);
+    }
+    if(keyCode == LEFT)
+    {
+      me.rotate(-10);
+    }
+    if(keyCode == RIGHT)
+    {
+      me.rotate(10);
+    }
   }
 }
 class SpaceShip extends Floater  
@@ -64,6 +76,19 @@ class SpaceShip extends Floater
   public double getDirectionY(){return myDirectionY;}
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
+}
+class Star
+{
+  private int z,a;
+  public Star()
+  {
+    z = (int)(Math.random()*600);
+    a = (int)(Math.random()*600); 
+  }
+  public void show()
+  {
+    ellipse(z, a, 5, 5);
+  }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
