@@ -14,6 +14,7 @@ public void draw()
   background(0);
   me.show();
   me.move();
+  me.accelerate(0);
   for (int i = 0; i < alot.length; i++)
   {
     alot[i].show();
@@ -166,41 +167,3 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
-
-
-/*if(me.getPointDirection() == 0)
-    {
-      me.setX(me.getX()+1);
-    }
-    else if (me.getPointDirection() == 90)
-    {
-      me.setY(me.getY()+1);
-    }
-    else if (me.getPointDirection() == 180)
-    {
-      me.setX(me.getX()-1);
-    }
-    else if(me.getPointDirection() == 270)
-    {
-      me.setY(me.getY()-1);
-    }
-    else if (me.getPointDirection() > 0 && me.getPointDirection() < 90)
-    {
-      me.setX(me.getX()+1);
-      me.setY(me.getY()+1);
-    }
-    else if (me.getPointDirection() > 90 && me.getPointDirection() < 180)
-    {
-      me.setX(me.getX()-1);
-      me.setY(me.getY()+1);
-    }
-    else if (me.getPointDirection() > 180 && me.getPointDirection() < 270)
-    {
-      me.setX(me.getX()-1);
-      me.setY(me.getY()-1);
-    }
-    else//me.getPointDirection() > 270 && me.getPointDirection() >360
-    {
-      me.setX(me.getX()+1);
-      me.setY(me.getY()-1);
-    }*/
