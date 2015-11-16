@@ -3,6 +3,8 @@ Star[] alot;
 public void setup() 
 {
   size(600,600);
+  me.setDirectionX(0);
+  me.setDirectionY(0);
   alot = new Star [100];
   for (int i = 0; i < alot.length; i++)
   {
@@ -14,22 +16,22 @@ public void draw()
   background(0);
   me.show();
   me.move();
-  me.accelerate(0);
+  
   for (int i = 0; i < alot.length; i++)
   {
     alot[i].show();
   }
-  
-
 }
 public void keyPressed()
 {
-  //redraw();
   if (key == 'h')
   {
+    me.setDirectionX(0);
+    me.setDirectionY(0);
     me.setX((int)(Math.random()*592)+8);
     me.setY((int)(Math.random()*590)+10);
     me.setPointDirection((int)(Math.random()*360));
+
   }
   if (key == CODED) 
   {
