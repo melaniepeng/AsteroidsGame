@@ -80,18 +80,62 @@ class SpaceShip extends Floater
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
 }
+class Asteroids extends Floater
+{
+  private int mySpeed;
+  public Asteroids()
+  {
+    mySpeed = (int)((Math.random()*11)-5);
+    myCenterX = 300;
+    myCenterY = 300;
+    myColor = 255;
+    myDirectionX = Math.cos(myPointDirection);
+    myDirectionY = Math.sin(myPointDirection);
+    myPointDirection = 0;
+    /*corners = 4;
+    int[] xS = {-8, 16, -8, -2};
+    int[] yS = {-8, 0, 8, 0};
+    xCorners = xS;
+    yCorners = yS;*/
+  }
+  public void setX(int x){myCenterX = x;}  
+  public int getX(){return (int)myCenterX;}
+  public void setY(int y){myCenterY = y;}
+  public int getY(){return (int)myCenterY;}
+  public void setDirectionX(double x){myDirectionX = x;}
+  public double getDirectionX(){return myDirectionX;}
+  public void setDirectionY(double y){myDirectionY = y;}
+  public double getDirectionY(){return myDirectionY;}
+  public void setPointDirection(int degrees){myPointDirection = degrees;}
+  public double getPointDirection(){return myPointDirection;}
+}
 class Star
 {
   private int z,a;
   public Star()
   {
     z = (int)(Math.random()*600);
-    a = (int)(Math.random()*600); 
+    a = (int)(Math.random()*590+10); 
+    //z = 0;
+    //a = 10;
   }
   public void show()
   {
-    ellipse(z, a, 5, 5);
-  }
+    fill()
+    beginShape();
+      vertex(z,a);
+      vertex(z + 2.2, a - 6.2);
+      vertex(z + 10, a - 6.2);
+      vertex(z + 4, a - 10);
+      vertex(z + 6, a - 16);
+      vertex(z,a - 12.5);
+      vertex(z - 6, a - 16);
+      vertex(z - 4, a - 10);
+      vertex(z - 10, a - 6.2);
+      vertex(z - 2.2, a - 6.2);
+      vertex(z,a);
+    endShape();
+  } 
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
