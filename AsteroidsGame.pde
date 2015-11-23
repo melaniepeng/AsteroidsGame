@@ -1,26 +1,36 @@
 SpaceShip me = new SpaceShip();
 Star[] alot;
+Asteroids[] obj;
 public void setup() 
 {
   size(600,600);
   me.setDirectionX(0);
   me.setDirectionY(0);
-  alot = new Star [100];
+  alot = new Star [30];
   for (int i = 0; i < alot.length; i++)
   {
     alot[i] = new Star();
+  }
+  obj = new Asteroids[13];
+  for (int j = 0; j < obj.length; j++)
+  {
+    obj[j] = new Asteroids();
   }
 }
 public void draw() 
 {
   background(0);
-  me.show();
-  me.move();
-  
   for (int i = 0; i < alot.length; i++)
   {
     alot[i].show();
   }
+  for (int j = 0; j < obj.length; j++)
+  {
+    obj[j].show();
+    obj[j].move();
+  }
+  me.show();
+  me.move();
 }
 public void keyPressed()
 {
@@ -57,6 +67,7 @@ class SpaceShip extends Floater
 {   
   public SpaceShip()
   {
+    myColor = 0;
     myCenterX = 300;
     myCenterY = 300;
     myColor = 255;
@@ -85,18 +96,63 @@ class Asteroids extends Floater
   private int mySpeed;
   public Asteroids()
   {
+    if(Math.random()>0.5)
+    {
+      mySpeed = 1; 
+    }
+    else
+    {
+      mySpeed = -1;
+    }
     mySpeed = (int)((Math.random()*11)-5);
-    myCenterX = 300;
-    myCenterY = 300;
-    myColor = 255;
+    myCenterX = (Math.random()*600);
+    myCenterY = (Math.random()*600);
+    myColor = 100;
     myDirectionX = Math.cos(myPointDirection);
     myDirectionY = Math.sin(myPointDirection);
     myPointDirection = 0;
-    /*corners = 4;
-    int[] xS = {-8, 16, -8, -2};
-    int[] yS = {-8, 0, 8, 0};
-    xCorners = xS;
-    yCorners = yS;*/
+    corners = 6;
+    xCorners = new int [corners];
+    yCorners = new int [corners];
+    xCorners[0] = 0;
+    yCorners[0] = 0;
+    xCorners[1] = 22;
+    yCorners[1] = 10;
+    xCorners[2] = 30;
+    yCorners[2] = 40;
+    xCorners[3] = 20;
+    yCorners[3] = 50;
+    xCorners[4] = -20;
+    yCorners[4] = 40;
+    xCorners[5] = -20;
+    yCorners[5] = 20;
+  }
+  public void move()
+  {
+    rotate(mySpeed);
+    myPointDirection = (Math.random()*360);
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY; 
+    if(myCenterX >width)
+    {     
+      myCenterX = 0;
+      myCenterY = (Math.random()*600);    
+    }    
+    else if (myCenterX<0)
+    {     
+      myCenterX = width;
+      myCenterY = (Math.random()*600);    
+    }    
+    if(myCenterY >height)
+    {    
+      myCenterY = 0;
+      myCenterX = (Math.random()*600);    
+    }   
+    else if (myCenterY < 0)
+    {     
+      myCenterY = height; 
+      myCenterX = (Math.random()*600);   
+    } 
   }
   public void setX(int x){myCenterX = x;}  
   public int getX(){return (int)myCenterX;}
@@ -121,7 +177,8 @@ class Star
   }
   public void show()
   {
-    fill()
+    noStroke();
+    fill(238, 221, 130);
     beginShape();
       vertex(z,a);
       vertex(z + 2.2, a - 6.2);
