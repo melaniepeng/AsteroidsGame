@@ -11,7 +11,7 @@ public void setup()
   {
     alot[i] = new Star();
   }
-  obj = new Asteroids[13];
+  obj = new Asteroids[10];
   for (int j = 0; j < obj.length; j++)
   {
     obj[j] = new Asteroids();
@@ -104,12 +104,11 @@ class Asteroids extends Floater
     {
       mySpeed = -1;
     }
-    mySpeed = (int)((Math.random()*11)-5);
     myCenterX = (Math.random()*600);
     myCenterY = (Math.random()*600);
     myColor = 100;
-    myDirectionX = Math.cos(myPointDirection);
-    myDirectionY = Math.sin(myPointDirection);
+    myDirectionX = (int)(Math.random()*7)-3;
+    myDirectionY = (int)(Math.random()*7)-3;
     myPointDirection = 0;
     corners = 6;
     xCorners = new int [corners];
@@ -130,29 +129,7 @@ class Asteroids extends Floater
   public void move()
   {
     rotate(mySpeed);
-    myPointDirection = (Math.random()*360);
-    myCenterX += myDirectionX;    
-    myCenterY += myDirectionY; 
-    if(myCenterX >width)
-    {     
-      myCenterX = 0;
-      myCenterY = (Math.random()*600);    
-    }    
-    else if (myCenterX<0)
-    {     
-      myCenterX = width;
-      myCenterY = (Math.random()*600);    
-    }    
-    if(myCenterY >height)
-    {    
-      myCenterY = 0;
-      myCenterX = (Math.random()*600);    
-    }   
-    else if (myCenterY < 0)
-    {     
-      myCenterY = height; 
-      myCenterX = (Math.random()*600);   
-    } 
+    super.move();
   }
   public void setX(int x){myCenterX = x;}  
   public int getX(){return (int)myCenterX;}
