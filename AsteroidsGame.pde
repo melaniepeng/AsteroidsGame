@@ -1,6 +1,6 @@
 SpaceShip me = new SpaceShip();
 Star[] alot;
-Asteroids[] obj;
+ArrayList <Asteroids> rocks;
 public void setup() 
 {
   size(600,600);
@@ -11,10 +11,10 @@ public void setup()
   {
     alot[i] = new Star();
   }
-  obj = new Asteroids[10];
-  for (int j = 0; j < obj.length; j++)
+  rocks = new ArrayList <Asteroids>();
+  for (int j = 0; j < 10; j++)
   {
-    obj[j] = new Asteroids();
+    rocks.add(j,new Asteroids());
   }
 }
 public void draw() 
@@ -24,13 +24,27 @@ public void draw()
   {
     alot[i].show();
   }
-  for (int j = 0; j < obj.length; j++)
+  for(int j = 0; j < rocks.size(); j++)
   {
-    obj[j].show();
-    obj[j].move();
+    rocks.get(j).show();
+    rocks.get(j).move();
+    if (dist(me.getX(), me.getY(), rocks.get(j).getX(), rocks.get(j).getY()) <= 20)
+    {
+      rocks.remove(j);
+    }
   }
   me.show();
   me.move();
+  /*for(int k = 0; k < 10; k++)
+  {
+    if (dist(me.getX(), me.getY(), rocks.get(k).getX(), rocks.get(k).getY()) < 20)
+    {
+      rocks.remove(k);
+    }
+  }*/
+  
+  //me.shot();
+  //if (me.getColor() == )
 }
 public void keyPressed()
 {
@@ -80,6 +94,15 @@ class SpaceShip extends Floater
     xCorners = xS;
     yCorners = yS;
   }
+  public void shot()
+  {
+      if (key == 's')
+      {
+        fill(0,255,127);
+        noStroke();
+        ellipse((float)myCenterX + 20,(float)myCenterY,7,7);
+      }
+  }
   public void setX(int x){myCenterX = x;}  
   public int getX(){return (int)myCenterX;}
   public void setY(int y){myCenterY = y;}
@@ -90,6 +113,7 @@ class SpaceShip extends Floater
   public double getDirectionY(){return myDirectionY;}
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
+  public int getColor(){return myColor;}
 }
 class Asteroids extends Floater
 {
@@ -107,8 +131,8 @@ class Asteroids extends Floater
     myCenterX = (Math.random()*600);
     myCenterY = (Math.random()*600);
     myColor = 100;
-    myDirectionX = (int)(Math.random()*7)-3;
-    myDirectionY = (int)(Math.random()*7)-3;
+    myDirectionX = (int)(Math.random()*5)-2;
+    myDirectionY = (int)(Math.random()*5)-2;
     myPointDirection = 0;
     corners = 6;
     xCorners = new int [corners];
