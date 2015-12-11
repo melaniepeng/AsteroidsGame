@@ -7,7 +7,7 @@ public void setup()
   size(600,600);
   me.setDirectionX(0);
   me.setDirectionY(0);
-  alot = new Star [30];
+  alot = new Star [50];
   for (int i = 0; i < alot.length; i++)
   {
     alot[i] = new Star();
@@ -26,26 +26,31 @@ public void draw()
   {
     alot[i].show();
   }
+  for (int z = 0; z < shot.size();z++)
+  {
+    shot.get(z).show();
+    shot.get(z).move();
+  }
+  
   for(int j = 0; j < rocks.size(); j++)
   {
     rocks.get(j).show();
     rocks.get(j).move();
+    
     for (int k = 0; k < shot.size();k++)
     {
-      shot.get(k).show();
-      shot.get(k).move();
-    if (dist(shot.get(k).getX(), shot.get(k).getY(), rocks.get(j).getX(), rocks.get(j).getY()) < 10)
-    {
-      rocks.remove(j);
-      shot. remove(k);
+      if (dist(shot.get(k).getX(), shot.get(k).getY(), rocks.get(j).getX(), rocks.get(j).getY()) < 20)
+      {
+        rocks.remove(j);
+        shot.remove(k);
+        break;
+      }
+      
     }
-  }
   }
   me.show();
   me.move();
   
-    //me.shot();
-  //if (me.getColor() == )
 }
 public void keyPressed()
 {
@@ -56,7 +61,6 @@ public void keyPressed()
     me.setX((int)(Math.random()*592)+8);
     me.setY((int)(Math.random()*590)+10);
     me.setPointDirection((int)(Math.random()*360));
-
   }
   if (key == 's')
   {
@@ -116,6 +120,7 @@ class Bullet extends Floater
   private double dRadians;
   public Bullet(SpaceShip theShip)
   {
+    myColor = 20;
     myCenterX = theShip.getX();
     myCenterY = theShip.getY();
     myPointDirection = theShip.getPointDirection();
@@ -133,6 +138,7 @@ class Bullet extends Floater
   public double getDirectionY(){return myDirectionY;}
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
+  public int getColor(){return myColor;}
   public void show()
   {
     noStroke();
@@ -196,6 +202,7 @@ class Asteroids extends Floater
   public double getDirectionY(){return myDirectionY;}
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
+  public int getColor(){return myColor;}
 }
 class Star
 {
